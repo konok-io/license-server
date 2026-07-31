@@ -32,7 +32,7 @@ class LicenseActivationFactory extends Factory
             'server_type'       => fake()->randomElement(['localhost', 'domain', 'vps']),
             'ip_address'        => fake()->ipv4(),
             'os_info'           => fake()->randomElement(['Windows Server 2022', 'Ubuntu 22.04', 'CentOS 7']),
-            'user_agent'        => 'SaudiManpowerERP/1.0',
+            'user_agent'        => 'MRHSoftwareERP/1.0',
             'status'            => ActivationStatus::Active->value,
             'activated_at'      => now(),
             'last_verified_at'  => now(),

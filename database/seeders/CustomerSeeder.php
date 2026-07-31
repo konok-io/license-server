@@ -16,7 +16,7 @@ class CustomerSeeder extends Seeder
             ['email' => 'demo@saudimanpower.sa'],
             [
                 'name'      => 'Demo Customer',
-                'company'   => 'Saudi Manpower Demo Co.',
+                'company'   => 'MRH Software Demo Co.',
                 'phone'     => '+966500000000',
                 'country'   => 'SA',
                 'is_active' => true,

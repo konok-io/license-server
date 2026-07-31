@@ -1,4 +1,4 @@
-# Saudi License Server — Phase 3 (Admin Management Layer)
+# MRH License Server — Phase 3 (Admin Management Layer)
 
 Install path: `C:\xampp\htdocs\saudi-license-server`
 Stack: Laravel 12 · PHP 8.3+ · MySQL · Bootstrap 5 · jQuery · DataTables · Spatie Permission

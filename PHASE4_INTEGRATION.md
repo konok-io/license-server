@@ -1,4 +1,4 @@
-# Saudi License Server — Phase 4 (Client-Facing License API)
+# MRH License Server — Phase 4 (Client-Facing License API)
 
 Install path: `C:\xampp\htdocs\saudi-license-server`
 Stack: Laravel 12 · PHP 8.3+ · MySQL · OpenSSL (RSA-4096)

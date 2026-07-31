@@ -29,7 +29,7 @@ class ActivationLogFactory extends Factory
             'normalized_domain'     => fake()->domainName(),
             'server_type'           => fake()->randomElement(['localhost', 'domain', 'vps']),
             'ip_address'            => fake()->ipv4(),
-            'user_agent'            => 'SaudiManpowerERP/1.0',
+            'user_agent'            => 'MRHSoftwareERP/1.0',
             'request_payload'       => ['source' => 'factory'],
         ];
     }

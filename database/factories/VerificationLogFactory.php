@@ -27,7 +27,7 @@ class VerificationLogFactory extends Factory
             'installation_id'         => 'INST-' . strtoupper(Str::random(24)),
             'normalized_domain'       => fake()->domainName(),
             'ip_address'              => fake()->ipv4(),
-            'user_agent'              => 'SaudiManpowerERP/1.0',
+            'user_agent'              => 'MRHSoftwareERP/1.0',
             'nonce'                   => bin2hex(random_bytes(16)),
             'latency_ms'              => fake()->numberBetween(5, 400),
             'request_payload'         => ['source' => 'factory'],
