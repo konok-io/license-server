@@ -1,7 +1,7 @@
 <aside class="sls-sidebar">
     <div class="sls-brand">
-        <span class="dot"></span>
-        <span>Saudi License Server</span>
+        <i class="bi bi-shield-lock-fill"></i>
+        <span>MRH License</span>
     </div>
 
     <nav class="sls-nav">
