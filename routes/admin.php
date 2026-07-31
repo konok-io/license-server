@@ -31,9 +31,10 @@ Route::middleware(['auth'])->group(function (): void {
     Route::get('settings', [SiteSettingController::class, 'edit'])->name('settings.edit');
     Route::put('settings', [SiteSettingController::class, 'update'])->name('settings.update');
 
-    /* ---------- Content Management (Tabbed Interface) ---------- */
+    /* ---------- Content Management (Separate Pages) ---------- */
     Route::get('content', [SiteSettingController::class, 'index'])->name('content.index');
-    Route::post('content', [SiteSettingController::class, 'updateContent'])->name('content.update');
+    Route::get('content/{section}', [SiteSettingController::class, 'show'])->name('content.show');
+    Route::put('content/{section}', [SiteSettingController::class, 'updateSection'])->name('content.update');
 
     /* ---------- Customers ---------- */
     Route::get('customers/data', [CustomerController::class, 'data'])->name('customers.data');
