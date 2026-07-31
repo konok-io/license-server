@@ -120,9 +120,31 @@
         .cta-band { background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 24px; padding: 4rem 2rem; text-align: center; position: relative; overflow: hidden; }
         .cta-band:after { content:''; position:absolute; width:340px; height:340px; border-radius:50%; background:var(--accent-gold-subtle); top:-120px; right:-80px; }
 
-        footer { background: var(--bg-card); color: var(--text-secondary); padding: 3rem 0 2rem; border-top: 1px solid var(--border-color); }
-        footer a { color: var(--text-secondary); } footer a:hover { color: var(--accent-gold); }
-        .foot-mark { width: 30px; height: 30px; border-radius: 8px; background: var(--accent-gold-subtle); display:grid; place-items:center; color:var(--accent-gold); }
+        /* Professional Footer */
+        footer { background: var(--bg-card); color: var(--text-secondary); border-top: 1px solid var(--border-color); }
+        .footer-main { padding: 4rem 0 3rem; }
+        .footer-brand { margin-bottom: 1.5rem; }
+        .footer-brand .brand { font-size: 1.1rem; }
+        .footer-brand p { font-size: 0.9rem; line-height: 1.7; max-width: 320px; }
+        .footer-heading { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-primary); margin-bottom: 1.25rem; }
+        .footer-links { list-style: none; padding: 0; margin: 0; }
+        .footer-links li { margin-bottom: 0.75rem; }
+        .footer-links a { color: var(--text-secondary); font-size: 0.9rem; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 0.5rem; }
+        .footer-links a:hover { color: var(--accent-gold); transform: translateX(4px); }
+        .footer-links a i { font-size: 0.75rem; }
+        .footer-social { display: flex; gap: 1rem; margin-top: 0.5rem; }
+        .footer-social a { width: 40px; height: 40px; border-radius: 10px; background: var(--bg-primary); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; color: var(--text-secondary); transition: all 0.3s ease; }
+        .footer-social a:hover { background: var(--accent-gold); border-color: var(--accent-gold); color: var(--bg-primary); transform: translateY(-3px); }
+        .footer-bottom { border-top: 1px solid var(--border-color); padding: 1.5rem 0; }
+        .footer-bottom-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .footer-copyright { font-size: 0.85rem; }
+        .footer-legal { display: flex; gap: 1.5rem; }
+        .footer-legal a { font-size: 0.85rem; color: var(--text-muted); }
+        .footer-legal a:hover { color: var(--accent-gold); }
+        @media (max-width: 768px) {
+            .footer-main { padding: 3rem 0 2rem; }
+            .footer-bottom-content { flex-direction: column; text-align: center; }
+        }
     </style>
 </head>
 <body>
@@ -327,7 +349,7 @@ $ php artisan <span class="cyn">mrh-license:verify</span> --force
         <div class="cta-band reveal">
             <h2 class="fw-bold mb-2 position-relative">{{ $s['cta_title'] ?? 'Ready to secure your software?' }}</h2>
             <p class="mb-4 opacity-75 position-relative">{{ $s['cta_text'] ?? '' }}</p>
-            <a href="{{ $s['cta_button_url'] ?? '/login' }}" class="btn btn-light btn-lg fw-semibold position-relative">
+            <a href="{{ $s['cta_button_url'] ?? '/login' }}" class="btn btn-accent btn-lg position-relative">
                 <i class="bi bi-box-arrow-in-right me-2"></i>{{ $s['cta_button_text'] ?? 'Go to Admin' }}
             </a>
         </div>
@@ -336,23 +358,91 @@ $ php artisan <span class="cyn">mrh-license:verify</span> --force
 
 {{-- ===== Footer ===== --}}
 <footer>
-    <div class="container">
-        <div class="row gy-4 align-items-center">
-            <div class="col-md-6">
-                <div class="brand text-white mb-2" style="color:#fff!important">
-                    <span class="foot-mark"><i class="bi bi-shield-lock-fill"></i></span>
-                    {{ $s['site_name'] ?? config('app.name') }}
+    <div class="footer-main">
+        <div class="container">
+            <div class="row g-5">
+                <!-- Brand Column -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-brand">
+                        <div class="brand mb-3">
+                            <span class="brand-icon"><i class="bi bi-shield-lock-fill"></i></span>
+                            {{ $s['site_name'] ?? config('app.name') }}
+                        </div>
+                        <p>{{ $s['footer_text'] ?? 'A secure, self-hosted licensing solution for your software products.' }}</p>
+                    </div>
+                    <div class="footer-social">
+                        @if($s['social_github'] ?? false)
+                            <a href="{{ $s['social_github'] }}" target="_blank" aria-label="GitHub"><i class="bi bi-github"></i></a>
+                        @endif
+                        @if($s['social_linkedin'] ?? false)
+                            <a href="{{ $s['social_linkedin'] }}" target="_blank" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                        @endif
+                        @if($s['social_twitter'] ?? false)
+                            <a href="{{ $s['social_twitter'] }}" target="_blank" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+                        @endif
+                        @if($s['contact_email'] ?? false)
+                            <a href="mailto:{{ $s['contact_email'] }}" aria-label="Email"><i class="bi bi-envelope"></i></a>
+                        @endif
+                    </div>
                 </div>
-                <div class="small">{{ $s['footer_text'] ?? '' }}</div>
+                
+                <!-- Quick Links -->
+                <div class="col-lg-2 col-md-6 col-6">
+                    <h6 class="footer-heading">Quick Links</h6>
+                    <ul class="footer-links">
+                        <li><a href="#features"><i class="bi bi-chevron-right"></i> Features</a></li>
+                        <li><a href="#how"><i class="bi bi-chevron-right"></i> How It Works</a></li>
+                        <li><a href="#security"><i class="bi bi-chevron-right"></i> Security</a></li>
+                        <li><a href="#faq"><i class="bi bi-chevron-right"></i> FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Support -->
+                <div class="col-lg-2 col-md-6 col-6">
+                    <h6 class="footer-heading">Support</h6>
+                    <ul class="footer-links">
+                        <li><a href="{{ $s['hero_primary_url'] ?? '/login' }}"><i class="bi bi-chevron-right"></i> Admin Login</a></li>
+                        @if($s['contact_email'] ?? false)
+                            <li><a href="mailto:{{ $s['contact_email'] }}"><i class="bi bi-chevron-right"></i> Contact Us</a></li>
+                        @endif
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div class="col-lg-4 col-md-6">
+                    <h6 class="footer-heading">Get In Touch</h6>
+                    <ul class="footer-links">
+                        @if($s['contact_email'] ?? false)
+                            <li>
+                                <a href="mailto:{{ $s['contact_email'] }}">
+                                    <i class="bi bi-envelope"></i>
+                                    {{ $s['contact_email'] }}
+                                </a>
+                            </li>
+                        @endif
+                        <li>
+                            <span style="color: var(--text-secondary); display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">
+                                <i class="bi bi-shield-check"></i>
+                                RSA-4096 Encrypted
+                            </span>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="col-md-6 text-md-end">
-                <div class="mb-2">
-                    @if($s['social_github'] ?? false)<a href="{{ $s['social_github'] }}" class="me-3" target="_blank"><i class="bi bi-github fs-5"></i></a>@endif
-                    @if($s['social_linkedin'] ?? false)<a href="{{ $s['social_linkedin'] }}" class="me-3" target="_blank"><i class="bi bi-linkedin fs-5"></i></a>@endif
-                    @if($s['social_twitter'] ?? false)<a href="{{ $s['social_twitter'] }}" class="me-3" target="_blank"><i class="bi bi-twitter-x fs-5"></i></a>@endif
-                    @if($s['contact_email'] ?? false)<a href="mailto:{{ $s['contact_email'] }}"><i class="bi bi-envelope fs-5"></i></a>@endif
+        </div>
+    </div>
+    
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="footer-bottom-content">
+                <div class="footer-copyright">
+                    <span>© {{ date('Y') }} {{ $s['site_name'] ?? config('app.name') }}. All rights reserved.</span>
                 </div>
-                <a href="{{ $s['hero_primary_url'] ?? '/login' }}" class="small">Admin Login <i class="bi bi-arrow-right"></i></a>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
             </div>
         </div>
     </div>
