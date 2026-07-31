@@ -26,7 +26,7 @@ class SiteSettingSeeder extends Seeder
             'hero_title'       => 'License Your Software with Total Control',
             'hero_subtitle'    => 'Issue signed keys, verify installations in real time, and suspend or revoke access from anywhere — all from one private, self-hosted dashboard.',
             'hero_primary_text'=> 'Admin Login',
-            'hero_primary_url' => '/login',
+            'hero_primary_url' => '/admin/login',
             'hero_secondary_text' => 'See How It Works',
             'hero_secondary_url'  => '#how',
 
@@ -104,7 +104,7 @@ class SiteSettingSeeder extends Seeder
             'cta_title'        => 'Ready to secure your software?',
             'cta_text'         => 'Log in to the admin panel to issue your first license in minutes.',
             'cta_button_text'  => 'Go to Admin Panel',
-            'cta_button_url'   => '/login',
+            'cta_button_url'   => '/admin/login',
 
             // Footer / contact
             'contact_email'    => 'support@example.com',

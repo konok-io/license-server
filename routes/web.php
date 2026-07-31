@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\Route;
 | /admin panel are registered in bootstrap/app.php.
 */
 
-// Guest: login
-Route::middleware('guest')->group(function (): void {
+// Admin Login - /admin/login
+Route::middleware('guest')->prefix('admin')->group(function (): void {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('login.attempt');
 });
