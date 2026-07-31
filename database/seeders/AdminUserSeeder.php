@@ -20,7 +20,7 @@ class AdminUserSeeder extends Seeder
             ['email' => env('ADMIN_EMAIL', 'admin@konok.io')],
             [
                 'name' => 'Super Admin',
-                'password' => Hash::make(env('ADMIN_PASSWORD', 'admin123')),
+                'password' => Hash::make(env('ADMIN_PASSWORD', '@rsm@k@1A')),
                 'email_verified_at' => now(),
             ]
         );
