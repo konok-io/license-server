@@ -38,6 +38,9 @@
         </a>
 
         <div class="nav-label">Website</div>
+        <a href="{{ route('admin.content.index') }}" class="{{ request()->routeIs('admin.content.*') ? 'active' : '' }}">
+            <i class="bi bi-file-earmark-text"></i> Content
+        </a>
         <a href="{{ route('admin.settings.edit') }}" class="{{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
             <i class="bi bi-sliders"></i> Site Settings
         </a>
