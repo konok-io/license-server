@@ -32,7 +32,7 @@ class LicenseSeeder extends Seeder
         });
 
         // Some edge-case licenses on the demo customer.
-        $demo = Customer::query()->where('email', 'demo@saudimanpower.sa')->first();
+        $demo = Customer::query()->where('email', 'demo@mrhsoftware.com')->first();
 
         if ($demo !== null) {
             License::factory()->for($demo)->localhost()->create();

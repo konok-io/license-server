@@ -13,7 +13,7 @@ class CustomerSeeder extends Seeder
     {
         // Deterministic demo customer for manual QA.
         Customer::query()->firstOrCreate(
-            ['email' => 'demo@saudimanpower.sa'],
+            ['email' => 'demo@mrhsoftware.com'],
             [
                 'name'      => 'Demo Customer',
                 'company'   => 'MRH Software Demo Co.',
