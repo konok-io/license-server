@@ -34,7 +34,7 @@ class LicenseFactory extends Factory
             'license_key_encrypted'       => $rawKey, // 'encrypted' cast handles at-rest encryption
             'license_key_hash'            => hash('sha256', $rawKey),
             'license_key_prefix'          => Str::substr($rawKey, 0, 8),
-            'product'                     => 'saudi-manpower-erp',
+            'product'                     => 'mrh-software-erp',
             'version'                     => fake()->randomElement(['1.0.0', '1.2.0', '2.0.0']),
             'type'                        => fake()->randomElement(LicenseType::cases())->value,
             'status'                      => LicenseStatus::Active->value,
