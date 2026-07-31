@@ -17,7 +17,7 @@ class AdminUserSeeder extends Seeder
     public function run(): void
     {
         $admin = User::query()->firstOrCreate(
-            ['email' => env('ADMIN_EMAIL', 'admin@saudilicense.local')],
+            ['email' => env('ADMIN_EMAIL', 'admin@konok.io')],
             [
                 'name' => 'Super Admin',
                 'password' => Hash::make(env('ADMIN_PASSWORD', 'admin123')),
