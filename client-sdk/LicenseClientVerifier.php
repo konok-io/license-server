@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Saudi License Server — Client-Side Verifier (embed in the ERP)
+ * MRH License Server — Client-Side Verifier (embed in the ERP)
  * -------------------------------------------------------------------------
  * Ships with the ERP alongside the vendor's PUBLIC key (public.pem only).
  * After calling POST /api/verify, the ERP passes the response's `data.verdict`

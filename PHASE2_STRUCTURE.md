@@ -1,4 +1,4 @@
-# Saudi License Server — Phase 2 Deliverables
+# MRH License Server — Phase 2 Deliverables
 
 Install path: `C:\xampp\htdocs\saudi-license-server`
 Stack: Laravel 12 · PHP 8.3+ · MySQL

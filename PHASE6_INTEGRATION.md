@@ -1,4 +1,4 @@
-# Saudi License Server — Phase 6 (Control Operations + Analytics Dashboard)
+# MRH License Server — Phase 6 (Control Operations + Analytics Dashboard)
 
 Install path: `C:\xampp\htdocs\saudi-license-server`
 Stack: Laravel 12 · PHP 8.3+ · MySQL · Bootstrap 5 · Chart.js 4 · AJAX

@@ -1,4 +1,4 @@
-# Saudi License Server — Phase 5 (Daily Verification + Signed Responses)
+# MRH License Server — Phase 5 (Daily Verification + Signed Responses)
 
 Install path: `C:\xampp\htdocs\saudi-license-server`
 Stack: Laravel 12 · PHP 8.3+ · MySQL · OpenSSL RSA-4096

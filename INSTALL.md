@@ -1,4 +1,4 @@
-# Saudi License Server — Installation (v3, Breeze-free)
+# MRH License Server — Installation (v3, Breeze-free)
 
 Install path উদাহরণ: `C:\laragon\www\saudi-license-server`
 Requirements: PHP 8.3+, Composer, MySQL 8+ (Laragon/XAMPP), OpenSSL.
