@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('license_key_hash', 64)->unique();       // SHA-256 hex
             $table->string('license_key_prefix', 16)->index();      // display only e.g. SLS-XXXX
 
-            $table->string('product', 100)->default('saudi-manpower-erp');
+            $table->string('product', 100)->default('mrh-software-erp');
             $table->string('version', 20)->nullable();
 
             $table->string('type')->default(LicenseType::Domain->value);
