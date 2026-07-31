@@ -17,7 +17,7 @@ class SiteSettingSeeder extends Seeder
     {
         $defaults = [
             // Brand / SEO
-            'site_name'        => 'Saudi License Server',
+            'site_name'        => 'MRH License Server',
             'site_tagline'     => 'Secure Software Licensing, Simplified',
             'meta_description' => 'A secure, self-hosted licensing server to issue, verify, and manage software licenses for your products in real time.',
 
@@ -86,7 +86,7 @@ class SiteSettingSeeder extends Seeder
 
             // About
             'about_title'      => 'Built for developers who ship',
-            'about_text'       => 'Saudi License Server gives you a complete licensing backend without third-party dependencies. Self-hosted, signed, and fully under your control — so you decide who can run your software and for how long.',
+            'about_text'       => 'MRH License Server gives you a complete licensing backend without third-party dependencies. Self-hosted, signed, and fully under your control — so you decide who can run your software and for how long.',
 
             // FAQ (4)
             'show_faq'         => '1',
@@ -108,7 +108,7 @@ class SiteSettingSeeder extends Seeder
 
             // Footer / contact
             'contact_email'    => 'support@example.com',
-            'footer_text'      => '(c) ' . date('Y') . ' Saudi License Server. All rights reserved.',
+            'footer_text'      => '(c) ' . date('Y') . ' MRH License Server. All rights reserved.',
             'social_github'    => '',
             'social_linkedin'  => '',
             'social_twitter'   => '',
