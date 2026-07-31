@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cryptographic Style - MRH License</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #050510;
+            --bg-secondary: #0a0a1a;
+            --accent-cyan: #00d4ff;
+            --accent-green: #00ff88;
+            --accent-purple: #a855f7;
+            --text-primary: #ffffff;
+            --text-secondary: #6b7280;
+            --border-color: rgba(0, 212, 255, 0.2);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Matrix rain effect */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.05;
+            background: linear-gradient(180deg, transparent 0%, var(--bg-primary) 100%);
+        }
+        
+        /* Scanlines */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 212, 255, 0.01) 2px,
+                rgba(0, 212, 255, 0.01) 4px
+            );
+        }
+        
+        /* Hex border animation */
+        .hex-border {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+        }
+        
+        .hex-border::before,
+        .hex-border::after {
+            content: '';
+            position: absolute;
+            background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+            height: 1px;
+            width: 100%;
+            animation: scanH 4s linear infinite;
+        }
+        
+        .hex-border::before { top: 0; }
+        .hex-border::after { bottom: 0; animation-direction: reverse; }
+        
+        @keyframes scanH {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        /* Main Container */
+        .crypto-container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        /* Header Bar */
+        .crypto-header {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-bottom: none;
+            border-radius: 16px 16px 0 0;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .header-hex {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .hex-dots {
+            display: flex;
+            gap: 6px;
+        }
+        
+        .hex-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--accent-cyan);
+        }
+        
+        .hex-dot:nth-child(2) {
+            background: var(--accent-green);
+            box-shadow: 0 0 10px var(--accent-green);
+        }
+        
+        .hex-dot:nth-child(3) {
+            background: var(--accent-purple);
+            box-shadow: 0 0 10px var(--accent-purple);
+        }
+        
+        .hex-path {
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+            padding: 4px 12px;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+        }
+        
+        .hex-status {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.75rem;
+            color: var(--accent-green);
+        }
+        
+        .hex-status::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.5); }
+            50% { opacity: 0.8; box-shadow: 0 0 0 8px rgba(0, 255, 136, 0); }
+        }
+        
+        /* Main Panel */
+        .crypto-panel {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 0 0 16px 16px;
+            overflow: hidden;
+        }
+        
+        /* Hex Header Banner */
+        .hex-banner {
+            background: linear-gradient(90deg, 
+                rgba(0, 212, 255, 0.1) 0%, 
+                rgba(168, 85, 247, 0.1) 50%,
+                rgba(0, 255, 136, 0.1) 100%);
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .hex-code {
+            font-size: 0.7rem;
+            color: var(--accent-cyan);
+            letter-spacing: 2px;
+        }
+        
+        .hex-title {
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .hex-badge {
+            padding: 4px 12px;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 4px;
+            font-size: 0.7rem;
+            color: var(--accent-green);
+        }
+        
+        /* Terminal Output */
+        .terminal-output {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .terminal-line {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+        }
+        
+        .terminal-line:last-child {
+            margin-bottom: 0;
+        }
+        
+        .line-prefix {
+            color: var(--accent-purple);
+            font-weight: 600;
+        }
+        
+        .line-text {
+            color: var(--text-secondary);
+        }
+        
+        .line-highlight {
+            color: var(--accent-cyan);
+        }
+        
+        .line-success {
+            color: var(--accent-green);
+        }
+        
+        .line-warning {
+            color: #fbbf24;
+        }
+        
+        /* Form Section */
+        .crypto-form-section {
+            padding: 30px;
+        }
+        
+        .section-header {
+            margin-bottom: 25px;
+        }
+        
+        .section-label {
+            font-size: 0.75rem;
+            color: var(--accent-cyan);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        
+        .section-title {
+            font-size: 1.4rem;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+        
+        .section-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        /* Input Group */
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .input-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .input-label .prefix {
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+        
+        .input-wrapper {
+            position: relative;
+        }
+        
+        .crypto-input {
+            width: 100%;
+            padding: 16px 18px;
+            padding-left: 45px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+        
+        .crypto-input::placeholder {
+            color: rgba(0, 212, 255, 0.3);
+            text-transform: none;
+            letter-spacing: 1px;
+        }
+        
+        .crypto-input:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+            box-shadow: 
+                0 0 0 3px rgba(0, 212, 255, 0.1),
+                inset 0 0 20px rgba(0, 212, 255, 0.05);
+        }
+        
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            color: var(--accent-cyan);
+            opacity: 0.5;
+        }
+        
+        /* Submit Button */
+        .crypto-submit {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-purple) 100%);
+            border: none;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--bg-primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .crypto-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+        
+        .crypto-submit svg {
+            width: 18px;
+            height: 18px;
+        }
+        
+        /* Hash Display */
+        .hash-display {
+            margin-top: 25px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+        
+        .hash-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            margin-bottom: 8px;
+        }
+        
+        .hash-row:last-child {
+            margin-bottom: 0;
+        }
+        
+        .hash-label {
+            color: var(--text-secondary);
+        }
+        
+        .hash-value {
+            color: var(--accent-purple);
+            font-size: 0.7rem;
+        }
+        
+        /* Footer */
+        .crypto-footer {
+            padding: 15px 20px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+        }
+        
+        .footer-hex {
+            color: var(--accent-cyan);
+        }
+        
+        .footer-version {
+            color: var(--accent-purple);
+        }
+        
+        @media (max-width: 480px) {
+            .hex-banner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .crypto-form-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix-bg"></div>
+    <div class="scanlines"></div>
+    <div class="hex-border"></div>
+    
+    <div class="crypto-container">
+        <div class="crypto-header">
+            <div class="header-hex">
+                <div class="hex-dots">
+                    <div class="hex-dot"></div>
+                    <div class="hex-dot"></div>
+                    <div class="hex-dot"></div>
+                </div>
+                <span class="hex-path">mrh-license::activate</span>
+            </div>
+            <div class="hex-status">SECURE CHANNEL</div>
+        </div>
+        
+        <div class="crypto-panel">
+            <div class="hex-banner">
+                <div>
+                    <div class="hex-code">0x7F 0xA1 0x3B</div>
+                    <div class="hex-title">MRH License Activation</div>
+                </div>
+                <div class="hex-badge">ENCRYPTED</div>
+            </div>
+            
+            <div class="terminal-output">
+                <div class="terminal-line">
+                    <span class="line-prefix">$</span>
+                    <span class="line-text">Initializing secure channel...</span>
+                    <span class="line-success"> [OK]</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="line-prefix">$</span>
+                    <span class="line-text">Verifying RSA-4096 signature...</span>
+                    <span class="line-success"> [READY]</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="line-prefix">$</span>
+                    <span class="line-text">Domain bound to:</span>
+                    <span class="line-highlight"> your-app.com</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="line-prefix">$</span>
+                    <span class="line-warning">License not found. Enter key to activate.</span>
+                </div>
+            </div>
+            
+            <div class="crypto-form-section">
+                <div class="section-header">
+                    <div class="section-label">// activation_required</div>
+                    <h2 class="section-title">Enter License Key</h2>
+                    <p class="section-desc">Provide your license key to decrypt and activate this installation.</p>
+                </div>
+                
+                <form onsubmit="event.preventDefault(); alert('Cryptographic Design - Preview Mode!');">
+                    <div class="input-group">
+                        <label class="input-label">
+                            <span class="prefix">></span> license_key
+                        </label>
+                        <div class="input-wrapper">
+                            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                            <input type="text" class="crypto-input" placeholder="XXXX-XXXX-XXXX-XXXX">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="crypto-submit">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5"/>
+                            <path d="M2 12l10 5 10-5"/>
+                        </svg>
+                        Decrypt & Activate
+                    </button>
+                </form>
+                
+                <div class="hash-display">
+                    <div class="hash-row">
+                        <span class="hash-label">algorithm</span>
+                        <span class="hash-value">RSA-4096-SHA256</span>
+                    </div>
+                    <div class="hash-row">
+                        <span class="hash-label">cache_ttl</span>
+                        <span class="hash-value">24 hours</span>
+                    </div>
+                    <div class="hash-row">
+                        <span class="hash-label">grace_period</span>
+                        <span class="hash-value">7 days</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="crypto-footer">
+                <span class="footer-hex">0xMRH :: LICENSE.SYS</span>
+                <span class="footer-version">v2.0.0</span>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.querySelector('.crypto-input').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+            let formatted = '';
+            for (let i = 0; i < value.length && i < 16; i++) {
+                if (i > 0 && i % 4 === 0) formatted += '-';
+                formatted += value[i];
+            }
+            e.target.value = formatted;
+        });
+    </script>
+</body>
+</html>

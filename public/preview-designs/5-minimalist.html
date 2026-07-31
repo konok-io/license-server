@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimalist Premium - MRH License</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=SF+Pro+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #f5f5f7;
+            --bg-card: #ffffff;
+            --text-primary: #1d1d1f;
+            --text-secondary: #86868b;
+            --accent-blue: #0071e3;
+            --accent-blue-light: #2997ff;
+            --border-color: #d2d2d7;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Subtle Pattern */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(0, 113, 227, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(41, 151, 255, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        /* Main Container */
+        .minimal-container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        /* Card */
+        .minimal-card {
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 50px 40px;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.07),
+                0 0 0 1px rgba(0, 0, 0, 0.04);
+            text-align: center;
+        }
+        
+        /* Icon */
+        .minimal-icon {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 30px;
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-blue-light) 100%);
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(0, 113, 227, 0.25);
+        }
+        
+        .minimal-icon svg {
+            width: 36px;
+            height: 36px;
+            color: #fff;
+        }
+        
+        /* Typography */
+        .minimal-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            letter-spacing: -0.02em;
+        }
+        
+        .minimal-subtitle {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 35px;
+            font-weight: 400;
+        }
+        
+        /* Form */
+        .minimal-form {
+            text-align: left;
+        }
+        
+        .form-group {
+            margin-bottom: 16px;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+        
+        .minimal-input {
+            width: 100%;
+            padding: 16px 18px;
+            background: var(--bg-primary);
+            border: 1.5px solid var(--border-color);
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--text-primary);
+            transition: all 0.2s ease;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+        
+        .minimal-input::placeholder {
+            color: #b8b8bf;
+            letter-spacing: 1px;
+            font-size: 0.95rem;
+        }
+        
+        .minimal-input:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.1);
+        }
+        
+        /* Button */
+        .minimal-button {
+            width: 100%;
+            padding: 17px 32px;
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-blue-light) 100%);
+            border: none;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .minimal-button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 30px rgba(0, 113, 227, 0.35);
+        }
+        
+        .minimal-button:active {
+            transform: scale(0.98);
+        }
+        
+        .minimal-button svg {
+            width: 18px;
+            height: 18px;
+        }
+        
+        /* Security Note */
+        .security-note {
+            margin-top: 30px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .security-features {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .security-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+        
+        .security-item svg {
+            width: 14px;
+            height: 14px;
+            color: var(--accent-blue);
+        }
+        
+        /* Footer */
+        .minimal-footer {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .footer-brand {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        
+        .footer-brand strong {
+            color: var(--text-primary);
+        }
+        
+        /* Error State */
+        .error-message {
+            display: none;
+            padding: 12px 16px;
+            background: #ffebe9;
+            border: 1px solid #ffccc7;
+            border-radius: 10px;
+            margin-bottom: 16px;
+            font-size: 0.85rem;
+            color: #c41e3a;
+            text-align: left;
+        }
+        
+        .error-message.show {
+            display: block;
+        }
+        
+        @media (max-width: 480px) {
+            .minimal-card {
+                padding: 40px 25px;
+                border-radius: 20px;
+            }
+            
+            .minimal-title {
+                font-size: 1.5rem;
+            }
+            
+            .minimal-icon {
+                width: 64px;
+                height: 64px;
+                border-radius: 18px;
+                margin-bottom: 24px;
+            }
+            
+            .minimal-icon svg {
+                width: 30px;
+                height: 30px;
+            }
+            
+            .security-features {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+    
+    <div class="minimal-container">
+        <div class="minimal-card">
+            <div class="minimal-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="7.5" cy="15.5" r="5"/>
+                    <path d="M21 2l-9.6 9.6"/>
+                    <path d="M15.5 7.5l3 3"/>
+                    <path d="M18 5l3 3"/>
+                </svg>
+            </div>
+            
+            <h1 class="minimal-title">Activate Your License</h1>
+            <p class="minimal-subtitle">Enter your license key to unlock full access to your software.</p>
+            
+            <form class="minimal-form" onsubmit="event.preventDefault(); alert('Minimalist Design - Preview Mode!');">
+                <div id="errorMsg" class="error-message">
+                    Invalid license key. Please check and try again.
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">License Key</label>
+                    <input type="text" class="minimal-input" placeholder="XXXX-XXXX-XXXX-XXXX" maxlength="19">
+                </div>
+                
+                <button type="submit" class="minimal-button">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                    Activate
+                </button>
+            </form>
+            
+            <div class="security-note">
+                <div class="security-features">
+                    <div class="security-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                        <span>RSA-4096 Encryption</span>
+                    </div>
+                    <div class="security-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12,6 12,12 16,14"/>
+                        </svg>
+                        <span>24h Verification</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="minimal-footer">
+            <p class="footer-brand">Protected by <strong>MRH License</strong></p>
+        </div>
+    </div>
+    
+    <script>
+        const input = document.querySelector('.minimal-input');
+        const errorMsg = document.getElementById('errorMsg');
+        
+        input.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+            let formatted = '';
+            for (let i = 0; i < value.length && i < 16; i++) {
+                if (i > 0 && i % 4 === 0) formatted += '-';
+                formatted += value[i];
+            }
+            e.target.value = formatted;
+            errorMsg.classList.remove('show');
+        });
+        
+        input.addEventListener('focus', function() {
+            errorMsg.classList.remove('show');
+        });
+    </script>
+</body>
+</html>
