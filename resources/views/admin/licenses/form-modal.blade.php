@@ -42,7 +42,7 @@
 
                         <div class="col-md-4">
                             <label class="form-label">Product</label>
-                            <input type="text" class="form-control" id="product" name="product" value="saudi-manpower-erp">
+                            <input type="text" class="form-control" id="product" name="product" value="mrh-software-erp">
                             <div class="invalid-feedback d-block" id="err_product"></div>
                         </div>
                         <div class="col-md-2">
