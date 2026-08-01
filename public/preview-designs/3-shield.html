@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shield Style - MRH License</title>
+    <title>Shield Style - MRH License Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -11,12 +11,17 @@
         :root {
             --bg-primary: #0c0c14;
             --bg-card: #12121c;
+            --bg-card-hover: #181825;
             --accent-gold: #f5a623;
             --accent-blue: #4f8cff;
             --accent-green: #4ade80;
+            --accent-red: #ef4444;
+            --accent-amber: #f59e0b;
             --text-primary: #ffffff;
             --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
             --border-color: rgba(245, 166, 35, 0.2);
+            --border-subtle: rgba(255, 255, 255, 0.08);
         }
         
         * {
@@ -79,7 +84,7 @@
             position: relative;
             z-index: 1;
             width: 100%;
-            max-width: 460px;
+            max-width: 520px;
         }
         
         /* Card Frame */
@@ -96,12 +101,13 @@
         /* Top Banner */
         .shield-banner {
             background: linear-gradient(135deg, 
-                rgba(245, 166, 35, 0.1) 0%, 
+                rgba(245, 166, 35, 0.15) 0%, 
                 rgba(79, 140, 255, 0.1) 50%,
                 rgba(74, 222, 128, 0.1) 100%);
-            padding: 25px;
+            padding: 30px 25px;
             border-bottom: 1px solid var(--border-color);
             text-align: center;
+            position: relative;
         }
         
         /* Shield Icon */
@@ -131,13 +137,30 @@
             transform: translate(-50%, -50%);
             width: 150px;
             height: 150px;
-            background: radial-gradient(circle, rgba(245, 166, 35, 0.2) 0%, transparent 70%);
-            animation: shieldPulse 3s ease-in-out infinite;
+            background: radial-gradient(circle, rgba(245, 166, 35, 0.3) 0%, transparent 70%);
+            animation: shieldPulse 2s ease-in-out infinite;
+        }
+        
+        .shield-pulse-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 160px;
+            height: 160px;
+            border: 2px solid rgba(245, 166, 35, 0.4);
+            border-radius: 50%;
+            animation: pulseRing 2s ease-out infinite;
         }
         
         @keyframes shieldPulse {
             0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
             50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+        }
+        
+        @keyframes pulseRing {
+            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
         }
         
         .shield-brand {
@@ -160,103 +183,257 @@
             color: var(--text-secondary);
         }
         
-        /* Protection Status */
-        .protection-status {
+        /* Quick Stats Section */
+        .quick-stats {
             padding: 20px 25px;
             border-bottom: 1px solid var(--border-color);
+            background: rgba(0, 0, 0, 0.2);
         }
         
-        .status-title {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
+        .stats-title {
+            font-size: 0.7rem;
+            color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 2px;
             margin-bottom: 15px;
-        }
-        
-        .status-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        .status-item {
             display: flex;
             align-items: center;
+            gap: 8px;
+        }
+        
+        .stats-title::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            animation: blink 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 12px;
-            padding: 12px 15px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
-            border: 1px solid transparent;
         }
         
-        .status-item.active {
-            border-color: rgba(74, 222, 128, 0.3);
-            background: rgba(74, 222, 128, 0.05);
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 15px 12px;
+            text-align: center;
+            transition: all 0.3s ease;
         }
         
-        .status-item.pending {
-            border-color: rgba(245, 166, 35, 0.3);
-            background: rgba(245, 166, 35, 0.05);
+        .stat-card:hover {
+            border-color: var(--accent-gold);
+            transform: translateY(-2px);
         }
         
-        .status-icon {
+        .stat-icon {
             width: 32px;
             height: 32px;
-            border-radius: 8px;
+            margin: 0 auto 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
+            border-radius: 8px;
         }
         
-        .status-icon.active {
-            background: rgba(74, 222, 128, 0.2);
+        .stat-icon.licenses {
+            background: rgba(79, 140, 255, 0.15);
+            color: var(--accent-blue);
+        }
+        
+        .stat-icon.installations {
+            background: rgba(74, 222, 128, 0.15);
             color: var(--accent-green);
         }
         
-        .status-icon.pending {
-            background: rgba(245, 166, 35, 0.2);
+        .stat-icon.uptime {
+            background: rgba(245, 166, 35, 0.15);
             color: var(--accent-gold);
         }
         
-        .status-icon svg {
+        .stat-icon svg {
             width: 18px;
             height: 18px;
         }
         
-        .status-info {
-            flex: 1;
-        }
-        
-        .status-name {
-            font-size: 0.85rem;
-            font-weight: 600;
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: 800;
             color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
             margin-bottom: 2px;
         }
         
-        .status-desc {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
+        .stat-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         
-        .status-badge {
+        /* Live Activity Section */
+        .live-activity {
+            padding: 20px 25px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .activity-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        
+        .activity-title {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.65rem;
+            color: var(--accent-green);
+            background: rgba(74, 222, 128, 0.1);
             padding: 4px 10px;
             border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
+            border: 1px solid rgba(74, 222, 128, 0.3);
         }
         
-        .status-badge.active {
-            background: rgba(74, 222, 128, 0.2);
+        .live-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            animation: livePulse 1s ease-in-out infinite;
+        }
+        
+        @keyframes livePulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+        
+        .activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 160px;
+            overflow-y: auto;
+        }
+        
+        .activity-list::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        .activity-list::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        .activity-list::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 2px;
+        }
+        
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .activity-item:hover {
+            border-color: var(--border-subtle);
+            background: rgba(0, 0, 0, 0.4);
+        }
+        
+        .activity-status {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        
+        .activity-status.success {
+            background: var(--accent-green);
+            box-shadow: 0 0 8px rgba(74, 222, 128, 0.5);
+        }
+        
+        .activity-status.warning {
+            background: var(--accent-amber);
+            box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
+            animation: flash 1.5s ease-in-out infinite;
+        }
+        
+        .activity-status.error {
+            background: var(--accent-red);
+            box-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
+        }
+        
+        @keyframes flash {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+        
+        .activity-content {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .activity-message {
+            font-size: 0.8rem;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .activity-meta {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+        }
+        
+        .activity-badge {
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            flex-shrink: 0;
+        }
+        
+        .activity-badge.activated {
+            background: rgba(74, 222, 128, 0.15);
             color: var(--accent-green);
         }
         
-        .status-badge.pending {
-            background: rgba(245, 166, 35, 0.2);
-            color: var(--accent-gold);
+        .activity-badge.expired {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--accent-red);
+        }
+        
+        .activity-badge.renewed {
+            background: rgba(79, 140, 255, 0.15);
+            color: var(--accent-blue);
         }
         
         /* Form Section */
@@ -350,22 +527,48 @@
             height: 20px;
         }
         
-        /* Footer */
+        /* Security Footer */
         .shield-footer {
-            padding: 15px 25px;
+            padding: 18px 25px;
             border-top: 1px solid var(--border-color);
+            background: linear-gradient(135deg, 
+                rgba(245, 166, 35, 0.05) 0%, 
+                rgba(79, 140, 255, 0.05) 100%);
+        }
+        
+        .footer-content {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 20px;
+            justify-content: space-between;
+            gap: 15px;
+        }
+        
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        
+        .footer-left svg {
+            width: 14px;
+            height: 14px;
+            color: var(--accent-green);
+        }
+        
+        .footer-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
         
         .footer-item {
             display: flex;
             align-items: center;
             gap: 6px;
-            font-size: 0.75rem;
-            color: var(--text-secondary);
+            font-size: 0.7rem;
+            color: var(--text-muted);
         }
         
         .footer-item svg {
@@ -374,13 +577,52 @@
             color: var(--accent-gold);
         }
         
+        .encryption-badge {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            background: rgba(74, 222, 128, 0.1);
+            border: 1px solid rgba(74, 222, 128, 0.3);
+            border-radius: 6px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--accent-green);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .encryption-badge svg {
+            width: 12px;
+            height: 12px;
+            color: var(--accent-green);
+        }
+        
         @media (max-width: 480px) {
             .shield-form-section {
                 padding: 20px;
             }
             
-            .protection-status {
+            .quick-stats, .live-activity {
                 padding: 15px 20px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+            
+            .stat-value {
+                font-size: 1.2rem;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .footer-right {
+                flex-wrap: wrap;
+                justify-content: center;
             }
         }
     </style>
@@ -393,9 +635,11 @@
     
     <div class="shield-container">
         <div class="shield-card">
+            <!-- Header with Shield -->
             <div class="shield-banner">
                 <div class="shield-icon-wrapper">
                     <div class="shield-glow"></div>
+                    <div class="shield-pulse-ring"></div>
                     <div class="shield-icon">
                         <svg viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
@@ -403,55 +647,103 @@
                     </div>
                 </div>
                 <div class="shield-brand">MRH LICENSE</div>
-                <h1 class="shield-title">Activate Protection</h1>
+                <h1 class="shield-title">MRH License Dashboard</h1>
                 <p class="shield-subtitle">Secure your installation with a valid license key</p>
             </div>
             
-            <div class="protection-status">
-                <div class="status-title">Security Features</div>
-                <div class="status-list">
-                    <div class="status-item pending">
-                        <div class="status-icon pending">
+            <!-- Quick Stats -->
+            <div class="quick-stats">
+                <div class="stats-title">Quick Stats</div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon licenses">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="7.5" cy="15.5" r="5"/>
-                                <path d="M21 2l-9.6 9.6"/>
+                                <rect x="3" y="11" width="18" height="11" rx="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                             </svg>
                         </div>
-                        <div class="status-info">
-                            <div class="status-name">License Key</div>
-                            <div class="status-desc">Not activated</div>
-                        </div>
-                        <span class="status-badge pending">Pending</span>
+                        <div class="stat-value">1,247</div>
+                        <div class="stat-label">Licenses</div>
                     </div>
-                    <div class="status-item active">
-                        <div class="status-icon active">
+                    <div class="stat-card">
+                        <div class="stat-icon installations">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                                <polyline points="3.27,6.96 12,12.01 20.73,6.96"/>
+                                <line x1="12" y1="22.08" x2="12" y2="12"/>
                             </svg>
                         </div>
-                        <div class="status-info">
-                            <div class="status-name">RSA-4096 Encryption</div>
-                            <div class="status-desc">Active protection</div>
-                        </div>
-                        <span class="status-badge active">Active</span>
+                        <div class="stat-value">892</div>
+                        <div class="stat-label">Installations</div>
                     </div>
-                    <div class="status-item active">
-                        <div class="status-icon active">
+                    <div class="stat-card">
+                        <div class="stat-icon uptime">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83"/>
+                                <polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/>
                             </svg>
                         </div>
-                        <div class="status-info">
-                            <div class="status-name">Domain Binding</div>
-                            <div class="status-desc">your-app.com</div>
-                        </div>
-                        <span class="status-badge active">Bound</span>
+                        <div class="stat-value">99.9%</div>
+                        <div class="stat-label">Uptime</div>
                     </div>
                 </div>
             </div>
             
+            <!-- Live Activity Feed -->
+            <div class="live-activity">
+                <div class="activity-header">
+                    <div class="activity-title">Live Activity</div>
+                    <div class="live-indicator">
+                        <div class="live-dot"></div>
+                        LIVE
+                    </div>
+                </div>
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <div class="activity-status success"></div>
+                        <div class="activity-content">
+                            <div class="activity-message">License activated for techcorp.io</div>
+                            <div class="activity-meta">2 minutes ago • RSA-4096</div>
+                        </div>
+                        <span class="activity-badge activated">Activated</span>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-status success"></div>
+                        <div class="activity-content">
+                            <div class="activity-message">License renewed for startup.dev</div>
+                            <div class="activity-meta">5 minutes ago • 1 Year</div>
+                        </div>
+                        <span class="activity-badge renewed">Renewed</span>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-status warning"></div>
+                        <div class="activity-content">
+                            <div class="activity-message">License expiring soon for app.com</div>
+                            <div class="activity-meta">12 minutes ago • 3 days left</div>
+                        </div>
+                        <span class="activity-badge expired">Warning</span>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-status success"></div>
+                        <div class="activity-content">
+                            <div class="activity-message">New installation registered</div>
+                            <div class="activity-meta">18 minutes ago • v2.4.1</div>
+                        </div>
+                        <span class="activity-badge activated">New</span>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-status error"></div>
+                        <div class="activity-content">
+                            <div class="activity-message">Invalid license attempt blocked</div>
+                            <div class="activity-meta">25 minutes ago • IP: 192.168.x.x</div>
+                        </div>
+                        <span class="activity-badge expired">Blocked</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Form Section -->
             <div class="shield-form-section">
-                <form onsubmit="event.preventDefault(); alert('Shield Design - Preview Mode!');">
+                <form onsubmit="event.preventDefault(); alert('Shield Dashboard - Preview Mode!');">
                     <label class="form-label">License Key</label>
                     <div class="form-input-wrapper">
                         <input type="text" class="shield-input" placeholder="XXXX-XXXX-XXXX-XXXX">
@@ -472,26 +764,44 @@
                 </form>
             </div>
             
+            <!-- Security Footer -->
             <div class="shield-footer">
-                <div class="footer-item">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <polyline points="12,6 12,12 16,14"/>
-                    </svg>
-                    24h Cache
-                </div>
-                <div class="footer-item">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 2v4m0 12v4"/>
-                        <path d="M4.93 4.93l2.83 2.83"/>
-                    </svg>
-                    7-Day Grace
+                <div class="footer-content">
+                    <div class="footer-left">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                        Secured by MRH
+                    </div>
+                    <div class="footer-right">
+                        <div class="encryption-badge">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                            256-bit AES
+                        </div>
+                        <div class="footer-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12,6 12,12 16,14"/>
+                            </svg>
+                            24h Cache
+                        </div>
+                        <div class="footer-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83"/>
+                            </svg>
+                            7-Day Grace
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     
     <script>
+        // Format license key input
         document.querySelector('.shield-input').addEventListener('input', function(e) {
             let value = e.target.value.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
             let formatted = '';
@@ -501,6 +811,51 @@
             }
             e.target.value = formatted;
         });
+        
+        // Simulate live activity updates
+        const activities = [
+            { message: 'License verified for api.service.io', meta: 'Just now • Valid', badge: 'verified', status: 'success' },
+            { message: 'Domain binding updated', meta: '1 minute ago • cloud.app.com', badge: 'Updated', status: 'success' },
+            { message: 'New API request logged', meta: '2 minutes ago • REST API', badge: 'API', status: 'success' },
+            { message: 'Heartbeat received from client', meta: '3 minutes ago • Online', badge: 'Heartbeat', status: 'success' },
+        ];
+        
+        let activityIndex = 0;
+        function addActivity() {
+            const list = document.querySelector('.activity-list');
+            const activity = activities[activityIndex % activities.length];
+            activityIndex++;
+            
+            const newItem = document.createElement('div');
+            newItem.className = 'activity-item';
+            newItem.style.opacity = '0';
+            newItem.style.transform = 'translateY(-10px)';
+            newItem.innerHTML = `
+                <div class="activity-status ${activity.status}"></div>
+                <div class="activity-content">
+                    <div class="activity-message">${activity.message}</div>
+                    <div class="activity-meta">${activity.meta}</div>
+                </div>
+                <span class="activity-badge activated">${activity.badge}</span>
+            `;
+            
+            list.insertBefore(newItem, list.firstChild);
+            
+            // Animate in
+            requestAnimationFrame(() => {
+                newItem.style.transition = 'all 0.3s ease';
+                newItem.style.opacity = '1';
+                newItem.style.transform = 'translateY(0)';
+            });
+            
+            // Remove old items if too many
+            while (list.children.length > 5) {
+                list.removeChild(list.lastChild);
+            }
+        }
+        
+        // Add new activity every 15 seconds
+        setInterval(addActivity, 15000);
     </script>
 </body>
 </html>
